@@ -1,0 +1,85 @@
+<view class="cart-container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+
+  <!-- 页面标题 -->
+  <view class="page-title">
+    <text class="title-text">购物车</text>
+    <text class="title-subtitle">购物车商品清单</text>
+  </view>
+
+  <!-- 订单操作栏：下单后显示 -->
+  <view class="order-action-bar" wx:if="{{showOrderBar}}">
+    <view class="order-info">
+      <text class="order-text">订单已创建，待付款</text>
+      <text class="order-price">¥{{currentOrder.totalPrice}}</text>
+    </view>
+    <view class="order-btns">
+      <button class="btn-cancel" bindtap="cancelPay">取消支付</button>
+      <button class="btn-pay" bindtap="payOrder">立即支付</button>
+    </view>
+  </view>
+
+  <view class="empty-cart" wx:if="{{cartList.length === 0 && !showOrderBar}}">
+    <text class="empty-icon">🛒</text>
+    <text class="empty-text">购物车为空</text>
+    <text class="empty-hint">快去挑选心仪商品吧~</text>
+    <button class="go-shop" bindtap="goShop">去逛逛</button>
+  </view>
+
+  <scroll-view class="cart-list" wx:if="{{cartList.length > 0 && !showOrderBar}}" scroll-y>
+    <view class="cart-item" wx:for="{{cartList}}" wx:key="goodsId">
+      <image 
+        class="goods-img" 
+        src="{{item.imgUrl}}" 
+        mode="cover"
+        lazy-load
+        binderror="onImgError"
+        data-index="{{index}}"
+      ></image>
+      <view class="goods-img-placeholder" wx:if="{{item.imgLoadError}}">
+        {{item.name.substring(0,2)}}
+      </view>
+
+      <view class="goods-info">
+        <text class="goods-name">{{item.name}}</text>
+        <view class="price-row">
+          <text class="price">¥{{item.nowPrice}}</text>
+          <text class="stock-tip" wx:if="{{item.stock < 5}}">库存紧张</text>
+        </view>
+      </view>
+      
+      <view class="num-control">
+        <view class="btn-minus {{item.num <= 1 ? 'disabled' : ''}}" bindtap="minusNum" data-id="{{item.id}}">
+          <text class="btn-icon">−</text>
+        </view>
+        <text class="num-text">{{item.num}}</text>
+        <view class="btn-plus {{item.num >= item.stock ? 'disabled' : ''}}" bindtap="plusNum" data-id="{{item.id}}">
+          <text class="btn-icon">+</text>
+        </view>
+      </view>
+      
+      <view class="del-btn" bindtap="delGoods" data-id="{{item.id}}">
+        <text class="del-icon">✕</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="cart-footer" wx:if="{{cartList.length > 0 && !showOrderBar}}">
+    <view class="footer-left">
+      <view class="total-price">
+        <text>合计：</text>
+        <text class="price">¥{{totalPrice}}</text>
+      </view>
+      <!-- 起送价提示 -->
+      <view class="min-order-tip {{totalPrice >= config.minOrderAmount ? 'enough' : 'not-enough'}}">
+        <text wx:if="{{totalPrice < config.minOrderAmount}}">📉 还差¥{{notEnoughAmount}}达到起送价¥{{config.minOrderAmount}}</text>
+        <text wx:else>✅ 已达到起送价¥{{config.minOrderAmount}}</text>
+      </view>
+    </view>
+    <button class="pay-btn {{totalPrice < config.minOrderAmount ? 'disabled' : ''}}" bindtap="goPay">提交订单</button>
+  </view>
+</view>

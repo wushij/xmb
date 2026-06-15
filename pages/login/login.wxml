@@ -1,0 +1,67 @@
+<view class="login-container">
+  <!-- 顶部装饰区 -->
+  <view class="header-decoration">
+    <view class="brand-logo">🏪</view>
+    <view class="brand-name">校园小卖部</view>
+    <view class="brand-slogan">便捷购物，美好生活</view>
+  </view>
+  
+  <!-- 内容卡片 -->
+  <view class="content-card">
+    <view class="card-title">完善个人信息</view>
+    <view class="card-subtitle">填写以下信息开始您的购物之旅</view>
+    
+    <!-- 头像选择区 -->
+    <view class="avatar-section">
+      <button 
+        class="avatar-btn" 
+        open-type="chooseAvatar" 
+        bindchooseavatar="onChooseAvatar"
+        hover-class="avatar-hover"
+      >
+        <block wx:if="{{userAvatar}}">
+          <image 
+            src="{{userAvatar}}" 
+            class="avatar-img"
+          ></image>
+        </block>
+        <block wx:else>
+          <view class="avatar-placeholder-wrap">
+            <view class="default-avatar">
+              <view class="avatar-head"></view>
+              <view class="avatar-body"></view>
+            </view>
+            <text class="avatar-placeholder-text">选择头像</text>
+          </view>
+        </block>
+      </button>
+    </view>
+    
+    <!-- 昵称输入区 -->
+    <view class="input-section">
+      <view class="input-label">昵称</view>
+      <view class="input-box">
+        <text class="input-icon">👤</text>
+        <input 
+          type="nickname" 
+          placeholder="请输入您的昵称" 
+          class="nickname-input"
+          bindinput="onNicknameInput"
+          value="{{nickName}}"
+          confirm-type="done"
+        />
+      </view>
+    </view>
+    
+    <!-- 确认按钮 -->
+    <button 
+      class="confirm-btn {{(!userAvatar || !nickName) ? 'btn-disabled' : ''}}" 
+      bindtap="handleConfirm"
+      disabled="{{!userAvatar || !nickName}}"
+      hover-class="btn-hover"
+    >
+      <text class="btn-text">确认登录</text>
+      <text class="btn-arrow" wx:if="{{userAvatar && nickName}}">→</text>
+    </button>
+  </view>
+</view>

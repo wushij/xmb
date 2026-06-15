@@ -1,0 +1,26 @@
+<view class="goods-item" bindtap="goDetail" data-id="{{goods.goodsId}}">
+  <!-- 商品图片：mode="cover" 自适应容器，lazy-load 懒加载，binderror 失败兜底 -->
+  <image 
+    class="goods-img" 
+    src="{{goods.imgUrl}}" 
+    mode="cover"
+    lazy-load
+    binderror="onImgError"
+  ></image>
+  <!-- 兜底占位符：图片不存在/加载失败时显示 -->
+  <view class="goods-img-placeholder" wx:if="{{!goods.imgUrl || imgLoadError}}">
+    {{goods.name.substring(0,2)}}
+  </view>
+
+  <view class="goods-info">
+    <view class="goods-name">{{goods.name}}</view>
+    <view class="goods-stock" wx:if="{{goods.stock > 0 && goods.stock < 5}}">仅剩{{goods.stock}}份</view>
+    <view class="goods-stock sold-out" wx:if="{{goods.stock <= 0}}">已售罄</view>
+    <view class="price-area">
+      <text class="now-price">¥{{goods.nowPrice}}</text>
+      <text class="old-price" wx:if="{{goods.oldPrice && goods.oldPrice != goods.nowPrice}}">¥{{goods.oldPrice}}</text>
+    </view>
+  </view>
+  
+  <view class="add-btn {{goods.stock <= 0 ? 'disabled' : ''}}" bindtap="addToCart" catchtap data-goods="{{goods}}">+</view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "商品分类",
+  "usingComponents": {
+    "goods-item": "/components/goods-item/goods-item"
+  }
+}

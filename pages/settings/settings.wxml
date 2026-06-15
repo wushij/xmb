@@ -1,0 +1,107 @@
+<view class="settings-container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+  
+  <!-- 页面标题 -->
+  <view class="page-title">
+    <text class="title-text">设置</text>
+    <text class="title-subtitle">管理您的应用设置</text>
+  </view>
+  
+  <!-- 设置卡片 -->
+  <view class="settings-card">
+    <!-- 消息通知设置 -->
+    <view class="setting-item">
+      <view class="item-left">
+        <text class="item-icon">🔔</text>
+        <text class="item-title">消息通知</text>
+      </view>
+      <switch class="switch" checked="{{noticeEnabled}}" bindchange="onNoticeSwitchChange" color="#667eea"/>
+    </view>
+    
+    <!-- 客服/帮助中心 -->
+    <view class="setting-item" bindtap="goToHelp">
+      <view class="item-left">
+        <text class="item-icon">💬</text>
+        <text class="item-title">客服/帮助中心</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+    
+    <!-- 意见反馈 -->
+    <view class="setting-item" bindtap="goToFeedback">
+      <view class="item-left">
+        <text class="item-icon">✍️</text>
+        <text class="item-title">意见反馈</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+    
+    <!-- 隐私设置 -->
+    <view class="setting-item" bindtap="goToPrivacy">
+      <view class="item-left">
+        <text class="item-icon">🔒</text>
+        <text class="item-title">隐私设置</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+    
+    <!-- 关于我们 -->
+    <view class="setting-item" bindtap="goToAbout">
+      <view class="item-left">
+        <text class="item-icon">ℹ️</text>
+        <text class="item-title">关于我们</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+  </view>
+  
+  <!-- 检查更新按钮 -->
+  <view class="update-btn-wrap">
+    <button class="update-btn" bindtap="checkUpdate" hover-class="update-btn-hover">
+      <text class="update-icon">🔍</text>
+      <text class="update-text">检查更新</text>
+    </button>
+  </view>
+</view>
+
+<!-- 客服弹窗 -->
+<view class="modal-overlay" wx:if="{{showCustomModal}}" bindtap="hideCustomModal">
+  <view class="modal" catchtap="stopPropagation">
+    <view class="modal-title">客服/帮助中心</view>
+    <view class="modal-content">
+      <text>【售后问题】
+
+您可通过以下方式联系客服：
+
+📞 客服电话：19860298230
+
+💬 客服微信：Besto57
+
+📧 邮箱：974473458@qq.com</text>
+    </view>
+    <button class="modal-btn" bindtap="hideCustomModal">我知道了</button>
+  </view>
+</view>
+
+<!-- 新增：隐私设置弹窗 -->
+<view class="modal-overlay" wx:if="{{showPrivacyModal}}" bindtap="hidePrivacyModal">
+  <view class="modal" catchtap="stopPropagation">
+    <view class="modal-title">隐私设置</view>
+    <view class="modal-content">
+      <text>📋 隐私政策说明
+
+1. 我们仅收集必要的用户信息用于服务提供；
+
+2. 您的信息不会被共享给第三方；
+
+3. 您可以随时在设置中关闭数据收集；
+
+4. 如需删除个人信息，请联系客服处理。</text>
+    </view>
+    <button class="modal-btn" bindtap="hidePrivacyModal">我知道了</button>
+  </view>
+</view>

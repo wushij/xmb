@@ -1,0 +1,269 @@
+/* 全局样式 */
+page {
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 头部区域 */
+.header {
+  width: 100%;
+  height: 450rpx;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 头部背景装饰 */
+.header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.deco-circle-1 {
+  width: 300rpx;
+  height: 300rpx;
+  top: -100rpx;
+  right: -50rpx;
+}
+
+.deco-circle-2 {
+  width: 200rpx;
+  height: 200rpx;
+  bottom: -80rpx;
+  left: -60rpx;
+}
+
+.deco-circle-3 {
+  width: 150rpx;
+  height: 150rpx;
+  top: 50rpx;
+  left: 100rpx;
+}
+
+/* 头部内容区 */
+.header-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-top: 60rpx;
+}
+
+/* 头像容器 */
+.avatar-wrapper {
+  position: relative;
+  margin-bottom: 24rpx;
+}
+
+/* 头像样式 */
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 6rpx solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8rpx 24rpx rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+/* 编辑图标 */
+.avatar-edit-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 48rpx;
+  height: 48rpx;
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  border-radius: 50%;
+  border: 4rpx solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.15);
+}
+
+.edit-icon-text {
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: -2rpx;
+}
+
+/* 用户信息区 */
+.user-info-section {
+  text-align: center;
+  color: #fff;
+}
+
+.user-name {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.user-phone {
+  display: block;
+  font-size: 26rpx;
+  opacity: 0.9;
+  margin-bottom: 8rpx;
+}
+
+.login-hint {
+  display: inline-block;
+  padding: 8rpx 24rpx;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 24rpx;
+  font-size: 24rpx;
+  backdrop-filter: blur(10rpx);
+}
+
+/* 订单状态卡片 */
+.order-status-card {
+  margin: -40rpx 30rpx 20rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 20;
+  overflow: hidden;
+}
+
+/* 订单状态栏 */
+.order-status {
+  display: flex;
+  justify-content: space-around;
+  padding: 40rpx 0 30rpx;
+}
+
+/* 单个状态项 */
+.status-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.status-item-hover {
+  opacity: 0.7;
+}
+
+/* 状态图标容器 */
+.status-icon-wrap {
+  position: relative;
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16rpx;
+}
+
+.status-emoji {
+  font-size: 56rpx;
+  line-height: 1;
+}
+
+/* 数字角标 */
+.status-badge {
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  padding: 0 8rpx;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 16rpx;
+  border: 2rpx solid #fff;
+  box-shadow: 0 2rpx 8rpx rgba(238, 90, 111, 0.4);
+  font-weight: bold;
+}
+
+/* 状态文字 */
+.status-text {
+  font-size: 24rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+/* 功能菜单列表 */
+.menu-list {
+  margin: 20rpx 30rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+/* 单个菜单项 */
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32rpx 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+  transition: background 0.3s;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item-hover {
+  background: #f8f9fa;
+}
+
+/* 菜单文字 */
+.menu-text {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+/* 箭头图标 */
+.arrow-icon {
+  width: 32rpx;
+  height: 32rpx;
+  opacity: 0.4;
+}
+
+/* 退出登录按钮 */
+.logout-wrap {
+  margin: 30rpx 30rpx 40rpx;
+  padding: 32rpx 0;
+  background: #fff;
+  border-radius: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.logout-wrap-hover {
+  background: #fff5f5;
+}
+
+.logout-text {
+  font-size: 30rpx;
+  color: #ff4757;
+  font-weight: 600;
+}

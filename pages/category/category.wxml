@@ -1,0 +1,68 @@
+<view class="page-container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+
+  <!-- 搜索栏卡片 -->
+  <view class="search-card">
+    <view class="search-input-wrap">
+      <text class="search-icon">🔍</text>
+      <input 
+        class="search-input"
+        placeholder="搜索商品名称..."
+        value="{{searchValue}}"
+        bindinput="onSearchInput"
+        confirm-type="search"
+        bindconfirm="onSearchConfirm"
+      />
+      <text 
+        wx:if="{{searchValue}}"
+        class="clear-icon"
+        catchtap="onClearSearch"
+      >✕</text>
+    </view>
+    <button class="search-btn" bindtap="onSearchConfirm">搜索</button>
+  </view>
+
+  <!-- 免配送费提示 -->
+  <view class="free-delivery-tip">
+    <text class="free-icon">🚚</text>
+    <text class="free-text">满{{freeDeliveryAmount}}元免配送费</text>
+  </view>
+
+  <view class="category-container">
+    <!-- 左侧分类原生滚动 -->
+    <scroll-view class="category-left" scroll-y>
+      <view 
+        class="category-item {{currentCate === item.id ? 'active' : ''}}"
+        wx:for="{{categoryList}}" 
+        wx:key="id"
+        bindtap="changeCate"
+        data-id="{{item.id}}"
+      >
+        <image class="cate-img" src="{{item.imgUrl}}" mode="aspectFill"></image>
+        <text class="cate-name">{{item.name}}</text>
+      </view>
+    </scroll-view>
+
+    <!-- 右侧商品原生滚动 -->
+    <scroll-view class="category-right" scroll-y>
+      <view class="goods-list">
+        <view wx:if="{{goodsList.length === 0}}" class="empty-tip">
+          <text class="empty-icon">📭</text>
+          <text class="empty-text">暂无相关商品~</text>
+        </view>
+        <block wx:else>
+          <goods-item 
+            wx:for="{{goodsList}}" 
+            wx:key="goodsId" 
+            goods="{{item}}"
+            bind:cartChange="cartChange"
+          ></goods-item>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+</view>

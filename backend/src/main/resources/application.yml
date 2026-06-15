@@ -1,0 +1,75 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: xmb-backend
+  # MySQL配置（完全对应你宝塔的数据库）
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/xmb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+  # Redis配置（对应你宝塔的Redis密码root）
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    database: 2
+    timeout: 10000ms
+  # JSON日期格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  # 解决Knife4j与Spring Boot 2.6+兼容性问题
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  # 文件上传配置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  # 跨域配置（必须加！）
+  web:
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+      allowed-headers: "*"
+      allow-credentials: true
+      max-age: 3600
+
+# MyBatis Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xmb.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# Sa-Token配置
+sa-token:
+  token-name: Authorization
+  timeout: 86400
+  active-timeout: -1
+  is-concurrent: true
+  is-share: true
+  token-style: uuid
+  is-log: false
+
+# Knife4j接口文档配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+# 微信小程序配置
+wx:
+  appid: wx53794b90690ca624
+  secret: 53e0ab38ccc40fb10a94caab7817b756

@@ -1,0 +1,110 @@
+<view class="profile-container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+  
+  <!-- 头像区域 -->
+  <view class="avatar-section">
+    <view class="avatar-wrapper" bindtap="changeAvatar">
+      <image src="{{userInfo.avatarUrl}}" class="profile-avatar" mode="aspectFill"></image>
+      <view class="avatar-edit-badge">
+        <text class="edit-icon">📷</text>
+      </view>
+    </view>
+    <text class="user-name">{{userInfo.nickName}}</text>
+    <text class="change-avatar-tip" bindtap="changeAvatar">点击更换头像</text>
+  </view>
+
+  <!-- 个人信息编辑卡片 -->
+  <view class="info-card">
+    <view class="card-title">基本信息</view>
+    
+    <view class="info-list">
+      <view class="info-item" bindtap="editNickName">
+        <view class="info-left">
+          <text class="info-icon">👤</text>
+          <text class="info-label">用户名</text>
+        </view>
+        <view class="info-right">
+          <text class="info-value">{{userInfo.nickName}}</text>
+          <text class="info-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="info-item" bindtap="editPhone">
+        <view class="info-left">
+          <text class="info-icon">📱</text>
+          <text class="info-label">手机号</text>
+        </view>
+        <view class="info-right">
+          <text class="info-value">{{userInfo.phone || '未设置'}}</text>
+          <text class="info-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="info-item" bindtap="editGender">
+        <view class="info-left">
+          <text class="info-icon">⚧</text>
+          <text class="info-label">性别</text>
+        </view>
+        <view class="info-right">
+          <text class="info-value">{{userInfo.gender}}</text>
+          <text class="info-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="info-item" bindtap="editBirthday">
+        <view class="info-left">
+          <text class="info-icon">🎂</text>
+          <text class="info-label">生日</text>
+        </view>
+        <view class="info-right">
+          <text class="info-value">{{userInfo.birthday}}</text>
+          <text class="info-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 保存按钮 -->
+  <view class="save-btn-wrap">
+    <button class="save-btn" bindtap="saveProfile" hover-class="save-btn-hover">
+      <text class="save-icon">💾</text>
+      <text class="save-text">保存修改</text>
+    </button>
+  </view>
+
+  <!-- 生日选择器弹窗 -->
+  <view class="date-picker-modal" wx:if="{{showDatePicker}}">
+    <view class="modal-mask" bindtap="onDateCancel"></view>
+    <view class="modal-content">
+      <view class="picker-header">
+        <text class="cancel-btn" bindtap="onDateCancel">取消</text>
+        <text class="title">选择生日</text>
+        <text class="confirm-btn" bindtap="onDateConfirm">确认</text>
+      </view>
+      <picker-view 
+        indicator-style="height: 50px;" 
+        style="width: 100%; height: 300px;" 
+        value="{{dateValue}}" 
+        bindchange="bindDateChange"
+        class="date-picker-view"
+      >
+        <!-- 年 -->
+        <picker-view-column>
+          <view wx:for="{{years}}" wx:key="*this" class="picker-item">{{item}}年</view>
+        </picker-view-column>
+        <!-- 月 -->
+        <picker-view-column>
+          <view wx:for="{{months}}" wx:key="*this" class="picker-item">{{item}}月</view>
+        </picker-view-column>
+        <!-- 日 -->
+        <picker-view-column>
+          <view wx:for="{{days}}" wx:key="*this" class="picker-item">{{item}}日</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</view>

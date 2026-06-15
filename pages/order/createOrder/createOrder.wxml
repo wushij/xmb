@@ -1,0 +1,165 @@
+<view class="container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+
+  <!-- 页面标题 -->
+  <view class="page-title">
+    <text class="title-text">确认订单</text>
+    <text class="title-subtitle">请确认订单信息</text>
+  </view>
+
+  <!-- 支付操作栏：下单后显示 -->
+  <view class="pay-action-bar" wx:if="{{showPayBar}}">
+    <view class="pay-info">
+      <text class="pay-text">订单已创建，待付款</text>
+      <text class="pay-price">¥{{currentOrder.totalPrice}}</text>
+    </view>
+    <view class="pay-btns">
+      <button class="btn-cancel" bindtap="cancelPay">取消支付</button>
+      <button class="btn-pay" bindtap="payOrder">立即支付</button>
+    </view>
+  </view>
+
+  <!-- 订单确认内容：下单前显示 -->
+  <view class="order-content" wx:if="{{!showPayBar}}">
+    <!-- 收货地址卡片 -->
+    <view class="address-card" bindtap="chooseAddress">
+      <view class="card-header">
+        <text class="card-icon">📍</text>
+        <text class="card-title">收货地址</text>
+      </view>
+      <view wx:if="{{address}}" class="address-info">
+        <view class="address-header">
+          <text class="name">{{address.name}}</text>
+          <text class="phone">{{address.phone}}</text>
+        </view>
+        <view class="address-detail">{{address.detail}}</view>
+      </view>
+      <view wx:else class="no-address">
+        <text class="no-address-icon">➕</text>
+        <text>请选择收货地址</text>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+    <!-- 配送方式选择卡片 -->
+    <view class="delivery-card">
+      <view class="card-header">
+        <text class="card-icon">🚚</text>
+        <text class="card-title">配送方式</text>
+      </view>
+      <view class="delivery-type-options">
+        <view class="delivery-type-item {{deliveryType === 0 ? 'active' : ''}}" bindtap="selectDeliveryType" data-type="0">
+          <view class="type-icon-wrap">
+            <text class="type-icon">🚚</text>
+          </view>
+          <view class="type-info">
+            <text class="type-name">配送到家</text>
+            <text class="type-desc" wx:if="{{isFreeDelivery}}">满¥{{config.freeDeliveryThreshold}}免配送费</text>
+            <text class="type-desc" wx:else>配送费¥{{config.deliveryFee}}</text>
+          </view>
+          <view class="type-radio {{deliveryType === 0 ? 'checked' : ''}}">
+            <text wx:if="{{deliveryType === 0}}">✓</text>
+          </view>
+        </view>
+        <view class="delivery-type-item {{deliveryType === 1 ? 'active' : ''}}" bindtap="selectDeliveryType" data-type="1">
+          <view class="type-icon-wrap">
+            <text class="type-icon">🏪</text>
+          </view>
+          <view class="type-info">
+            <text class="type-name">到店自提</text>
+            <text class="type-desc">免配送费，下单后到店取货</text>
+          </view>
+          <view class="type-radio {{deliveryType === 1 ? 'checked' : ''}}">
+            <text wx:if="{{deliveryType === 1}}">✓</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 商品清单卡片 -->
+    <view class="goods-card">
+      <view class="card-header">
+        <text class="card-icon">📦</text>
+        <text class="card-title">商品清单</text>
+      </view>
+      <view class="goods-list">
+        <view class="goods-item" wx:for="{{cartList}}" wx:key="id">
+          <image class="goods-img" src="{{item.imgUrl}}" mode="aspectFit" binderror="onImgError" data-index="{{index}}"></image>
+          <view class="goods-img-placeholder" wx:if="{{item.imgLoadError}}">{{item.name.substring(0,2)}}</view>
+          <view class="goods-info">
+            <text class="goods-name">{{item.name}}</text>
+            <view class="goods-price-row">
+              <text class="goods-price">¥{{item.nowPrice}}</text>
+              <text class="goods-num">x{{item.num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 配送费信息 -->
+      <view class="delivery-info" wx:if="{{deliveryType === 0}}">
+        <view class="delivery-fee-row">
+          <text class="delivery-label">配送费</text>
+          <text class="delivery-value">¥{{isFreeDelivery ? 0 : deliveryFee}}</text>
+        </view>
+        <view class="delivery-tip" wx:if="{{!isFreeDelivery && goodsTotalPrice > 0}}">
+          <text>💡 再买¥{{needMorePrice}}可免配送费</text>
+        </view>
+        <view class="delivery-tip free" wx:if="{{isFreeDelivery}}">
+          <text>✅ 已满¥{{config.freeDeliveryThreshold}}，享免配送费优惠</text>
+        </view>
+      </view>
+      <view class="delivery-info self-pickup" wx:if="{{deliveryType === 1}}">
+        <view class="delivery-fee-row">
+          <text class="delivery-label">自提方式</text>
+          <text class="delivery-value free-text">免配送费</text>
+        </view>
+        <view class="delivery-tip free">
+          <text>🏪 下单后可到门店自提</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 备注卡片 -->
+    <view class="remark-card">
+      <view class="card-header">
+        <text class="card-icon">📝</text>
+        <text class="card-title">订单备注</text>
+      </view>
+      <textarea class="remark-input" placeholder="选填，请输入备注信息" value="{{remark}}" bindinput="onRemarkInput" maxlength="200" disabled="{{loading}}"></textarea>
+    </view>
+
+    <!-- 底部结算栏 -->
+    <view class="bottom-bar">
+      <view class="price-detail">
+        <view class="price-row">
+          <text>商品金额：</text>
+          <text>¥{{goodsTotalPrice}}</text>
+        </view>
+        <view class="price-row" wx:if="{{deliveryType === 0 && !isFreeDelivery}}">
+          <text>配送费：</text>
+          <text>¥{{deliveryFee}}.00</text>
+        </view>
+        <view class="price-row free" wx:if="{{deliveryType === 0 && isFreeDelivery}}">
+          <text>配送费：</text>
+          <text>¥0.00</text>
+        </view>
+        <view class="price-row free" wx:if="{{deliveryType === 1}}">
+          <text>自提：</text>
+          <text>免配送费</text>
+        </view>
+      </view>
+      <view class="total-price">
+        <text>合计：</text>
+        <text class="price">¥{{totalPrice}}</text>
+      </view>
+      <button class="submit-btn {{loading ? 'disabled' : ''}}" bindtap="submitOrder" disabled="{{loading}}">
+        {{loading ? '提交中...' : '提交订单'}}
+      </button>
+    </view>
+  </view>
+</view>

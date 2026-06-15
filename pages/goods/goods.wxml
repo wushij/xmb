@@ -1,0 +1,59 @@
+<view class="goods-detail">
+  <!-- 商品图片区域 -->
+  <view class="goods-img-wrap">
+    <image 
+      class="goods-img" 
+      src="{{goodsInfo.imgUrl}}" 
+      mode="aspectFit"
+      binderror="onImgError"
+    ></image>
+    <view class="goods-img-placeholder" wx:if="{{imgLoadError}}">
+      <text>{{goodsInfo.name}}</text>
+    </view>
+  </view>
+
+  <!-- 商品信息卡片 -->
+  <view class="goods-info-card">
+    <view class="goods-name">{{goodsInfo.name}}</view>
+    
+    <view class="price-section">
+      <view class="price-main">
+        <text class="price-label">现价</text>
+        <text class="now-price">¥{{goodsInfo.nowPrice}}</text>
+      </view>
+      <view class="old-price-wrap" wx:if="{{goodsInfo.oldPrice && goodsInfo.oldPrice != goodsInfo.nowPrice}}">
+        <text class="old-price">¥{{goodsInfo.oldPrice}}</text>
+        <text class="discount-tag">优惠</text>
+      </view>
+    </view>
+
+    <view class="stock-section">
+      <view class="stock-info">
+        <text class="stock-icon">📦</text>
+        <text>库存：{{goodsInfo.stock}}件</text>
+      </view>
+      <text class="low-stock" wx:if="{{goodsInfo.stock < 5}}">⚠️ 库存紧张</text>
+    </view>
+  </view>
+
+  <!-- 商品详情描述卡片 -->
+  <view class="goods-desc-card">
+    <view class="card-title">
+      <text class="title-icon">📝</text>
+      <text>商品详情</text>
+    </view>
+    <view class="desc-content">
+      <text>{{goodsInfo.desc || '暂无详情描述'}}</text>
+    </view>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="cart-icon" bindtap="goCart">
+      <text class="iconfont">🛒</text>
+      <text class="cart-num" wx:if="{{cartNum > 0}}">{{cartNum}}</text>
+    </view>
+    <view class="add-cart-btn" bindtap="addToCart">加入购物车</view>
+    <view class="buy-btn" bindtap="buyNow">立即购买</view>
+  </view>
+</view>

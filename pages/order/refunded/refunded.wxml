@@ -1,0 +1,82 @@
+<view class="refunded-container">
+  <!-- 顶部紫色渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+  </view>
+  
+  <!-- 页面标题 -->
+  <view class="page-title">
+    <text class="title-text">退款</text>
+    <text class="title-subtitle">查看退款订单</text>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <!-- 空状态提示 -->
+    <view class="empty-section" wx:if="{{refundedList.length === 0}}">
+      <view class="empty-icon">📭</view>
+      <text class="empty-title">暂无退款订单</text>
+      <text class="empty-hint">快去选购心仪的商品吧~</text>
+      <view class="empty-btn" bindtap="goShopping">去逛逛</view>
+    </view>
+
+    <!-- 订单卡片 -->
+    <view class="order-card" wx:for="{{refundedList}}" wx:key="orderId">
+      <!-- 订单头部 -->
+      <view class="order-header">
+        <view class="order-no-wrap">
+          <text class="order-label">订单编号</text>
+          <text class="order-no">{{item.orderNo || item.orderId}}</text>
+        </view>
+        <view class="order-status-wrap" style="background: rgba(156, 39, 176, 0.1);">
+          <text class="status-dot" style="background: #9C27B0;"></text>
+        </view>
+      </view>
+
+      <!-- 商品列表 -->
+      <view class="goods-container" wx:if="{{item.goodsList.length > 0}}">
+        <view class="goods-item" wx:for="{{item.goodsList}}" wx:for-item="goods" wx:key="goodsId">
+          <image src="{{goods.imgUrl}}" class="goods-img" mode="aspectFill"></image>
+          <view class="goods-info">
+            <text class="goods-name">{{goods.name}}</text>
+            <view class="goods-price-row">
+              <text class="goods-price">¥{{goods.nowPrice}}</text>
+              <text class="goods-num">x{{goods.num}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="empty-goods" wx:else>
+        <text>暂无商品信息</text>
+      </view>
+
+      <!-- 配送费信息 -->
+      <view class="delivery-info">
+        <view class="delivery-left">
+          <text class="delivery-icon">🚚</text>
+          <text class="delivery-label">配送费</text>
+        </view>
+        <text class="delivery-free" wx:if="{{item.deliveryFee == 0 || item.isFreeDelivery}}">免配送费</text>
+        <text class="delivery-fee" wx:else>¥{{item.deliveryFee || 3}}</text>
+      </view>
+
+      <!-- 订单底部 -->
+      <view class="order-footer">
+        <view class="order-info">
+          <view class="info-row">
+            <text class="info-icon">💰</text>
+            <text class="refund-label">退款金额</text>
+          </view>
+          <view class="total-row">
+            <text class="total-price">¥{{item.totalPrice}}</text>
+          </view>
+        </view>
+        
+        <view class="order-op">
+          <button class="op-btn detail-btn" bindtap="viewRefundDetail" data-orderid="{{item.orderId}}" data-price="{{item.totalPrice}}">查看详情</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

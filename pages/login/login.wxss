@@ -1,0 +1,270 @@
+/* 全局容器 */
+.login-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部装饰区 */
+.header-decoration {
+  padding: 120rpx 40rpx 80rpx;
+  text-align: center;
+  color: #fff;
+}
+
+.brand-logo {
+  font-size: 100rpx;
+  margin-bottom: 20rpx;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10rpx);
+  }
+}
+
+.brand-name {
+  font-size: 48rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+  text-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.brand-slogan {
+  font-size: 28rpx;
+  opacity: 0.9;
+}
+
+/* 内容卡片 */
+.content-card {
+  flex: 1;
+  background: #fff;
+  border-radius: 40rpx 40rpx 0 0;
+  padding: 60rpx 40rpx 40rpx;
+  box-shadow: 0 -10rpx 40rpx rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 12rpx;
+}
+
+.card-subtitle {
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
+  margin-bottom: 50rpx;
+}
+
+/* 头像区域 */
+.avatar-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50rpx;
+}
+
+.avatar-btn {
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 50%;
+  padding: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.avatar-btn::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.avatar-hover::before {
+  opacity: 1;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-placeholder-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 默认头像样式 */
+.default-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 20rpx;
+  position: relative;
+}
+
+/* 头像头部 */
+.avatar-head {
+  width: 40rpx;
+  height: 40rpx;
+  background: rgba(102, 126, 234, 0.8);
+  border-radius: 50%;
+  position: absolute;
+  top: 20rpx;
+}
+
+/* 头像身体 */
+.avatar-body {
+  width: 60rpx;
+  height: 30rpx;
+  background: rgba(102, 126, 234, 0.8);
+  border-radius: 30rpx 30rpx 0 0;
+  position: absolute;
+  bottom: 15rpx;
+}
+
+.avatar-placeholder-text {
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.95);
+  margin-top: 12rpx;
+  font-weight: 500;
+}
+
+/* 输入框区域 */
+.input-section {
+  margin-bottom: 50rpx;
+}
+
+.input-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  background: #f8f9fa;
+  border-radius: 16rpx;
+  padding: 0 24rpx;
+  height: 88rpx;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.input-box:focus-within {
+  background: #fff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4rpx rgba(102, 126, 234, 0.1);
+}
+
+.input-icon {
+  font-size: 32rpx;
+  margin-right: 16rpx;
+}
+
+.nickname-input {
+  flex: 1;
+  height: 100%;
+  font-size: 28rpx;
+  border: none;
+  background: transparent;
+}
+
+.nickname-input::placeholder {
+  color: #bbb;
+}
+
+/* 确认按钮 */
+.confirm-btn {
+  width: 100%;
+  height: 96rpx;
+  border-radius: 48rpx;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8rpx 24rpx rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  margin-top: 20rpx;
+}
+
+.btn-hover {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 12rpx rgba(102, 126, 234, 0.3);
+}
+
+.btn-disabled {
+  background: #e0e0e0 !important;
+  box-shadow: none !important;
+  color: #999 !important;
+}
+
+.btn-text {
+  margin-right: 8rpx;
+}
+
+.btn-arrow {
+  font-size: 36rpx;
+  font-weight: bold;
+  animation: slideRight 1s infinite;
+}
+
+@keyframes slideRight {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(8rpx);
+  }
+}
+
+/* 底部提示 */
+.footer-tip {
+  text-align: center;
+  padding: 30rpx 40rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.link-text {
+  color: #667eea;
+  margin: 0 4rpx;
+}

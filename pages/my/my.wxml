@@ -1,0 +1,116 @@
+<!-- 头部区域 -->
+<view class="header" bindtap="toLogin">
+  <view class="header-bg">
+    <!-- 装饰圆形 -->
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+    <view class="deco-circle deco-circle-3"></view>
+  </view>
+  
+  <view class="header-content">
+    <!-- 头像 -->
+    <view class="avatar-wrapper">
+      <image 
+        src="{{isLogin ? avatarUrl : '/images/tabbar/头像.png'}}"
+        mode="aspectFill"
+        class="avatar"
+        display="block"
+        lazy-load="true"
+      ></image>
+      <!-- 未登录时的编辑图标 -->
+      <view class="avatar-edit-icon" wx:if="{{!isLogin}}">
+        <text class="edit-icon-text">+</text>
+      </view>
+    </view>
+    
+    <!-- 用户信息 -->
+    <view class="user-info-section">
+      <text class="user-name">{{isLogin ? userName : '点击登录'}}</text>
+      <text class="user-phone" wx:if="{{isLogin}}">{{userPhone || '完善个人信息'}}</text>
+      <view class="login-hint" wx:if="{{!isLogin}}">
+        <text>登录后享受更多服务</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 订单状态栏 -->
+<view class="order-status-card" wx:if="{{isLogin}}">
+  <view class="order-status">
+    <view class="status-item" bindtap="goToWaitPay" hover-class="status-item-hover">
+      <view class="status-icon-wrap">
+        <text class="status-emoji">💳</text>
+        <view class="status-badge" wx:if="{{waitPayNum > 0}}">{{waitPayNum > 99 ? '99+' : waitPayNum}}</view>
+      </view>
+      <text class="status-text">待付款</text>
+    </view>
+    <view class="status-item" bindtap="goToWaitDelivery" hover-class="status-item-hover">
+      <view class="status-icon-wrap">
+        <text class="status-emoji">📦</text>
+        <view class="status-badge" wx:if="{{waitDeliveryNum > 0}}">{{waitDeliveryNum > 99 ? '99+' : waitDeliveryNum}}</view>
+      </view>
+      <text class="status-text">待发货</text>
+    </view>
+    <view class="status-item" bindtap="goToRefunded" hover-class="status-item-hover">
+      <view class="status-icon-wrap">
+        <text class="status-emoji">💰</text>
+        <view class="status-badge" wx:if="{{refundedNum > 0}}">{{refundedNum > 99 ? '99+' : refundedNum}}</view>
+      </view>
+      <text class="status-text">已退款</text>
+    </view>
+    <view class="status-item" bindtap="goToAllOrder" hover-class="status-item-hover">
+      <view class="status-icon-wrap">
+        <text class="status-emoji">📋</text>
+        <view class="status-badge" wx:if="{{allOrderNum > 0}}">{{allOrderNum > 99 ? '99+' : allOrderNum}}</view>
+      </view>
+      <text class="status-text">全部订单</text>
+    </view>
+  </view>
+</view>
+
+<!-- 功能菜单列表：保留原有逻辑 + 新增设置入口 -->
+<view class="menu-list" wx:if="{{isLogin}}">
+  <view class="menu-item" bindtap="goToProfile" hover-class="menu-item-hover">
+    <text class="menu-text">个人资料</text>
+    <image 
+      src="/images/my/箭头.png"
+      mode="aspectFit"
+      class="arrow-icon"
+      display="block"
+    ></image>
+  </view>
+  <view class="menu-item" bindtap="goToAddress" hover-class="menu-item-hover">
+    <text class="menu-text">收货地址</text>
+    <image 
+      src="/images/my/箭头.png"
+      mode="aspectFit"
+      class="arrow-icon"
+      display="block"
+    ></image>
+  </view>
+  <view class="menu-item" bindtap="goToAbout" hover-class="menu-item-hover">
+    <text class="menu-text">关于我们</text>
+    <image 
+      src="/images/my/箭头.png"
+      mode="aspectFit"
+      class="arrow-icon"
+      display="block"
+    ></image>
+  </view>
+  <!-- ========== 新增：设置菜单入口（样式和其他菜单项一致） ========== -->
+  <view class="menu-item" bindtap="goToSettings" hover-class="menu-item-hover">
+    <text class="menu-text">设置</text>
+    <image 
+      src="/images/my/箭头.png"
+      mode="aspectFit"
+      class="arrow-icon"
+      display="block"
+    ></image>
+  </view>
+  <!-- ========== 新增结束 ========== -->
+</view>
+
+<!-- 退出登录：保留原有逻辑 -->
+<view class="logout-wrap" bindtap="handleLogout" hover-class="logout-wrap-hover" wx:if="{{isLogin}}">
+  <text class="logout-text">退出登录</text>
+</view>

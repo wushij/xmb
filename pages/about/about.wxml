@@ -1,0 +1,82 @@
+<view class="about-container">
+  <!-- 顶部渐变背景区 -->
+  <view class="header-bg">
+    <view class="deco-circle deco-circle-1"></view>
+    <view class="deco-circle deco-circle-2"></view>
+    <view class="deco-circle deco-circle-3"></view>
+  </view>
+  
+  <!-- 小程序信息 -->
+  <view class="about-info">
+    <view class="logo-wrapper">
+      <image src="/images/my/头像.png" class="about-logo" mode="aspectFill"></image>
+      <view class="logo-badge">
+        <text class="badge-icon">🏪</text>
+      </view>
+    </view>
+    <text class="app-name">校园小卖部</text>
+    <text class="app-slogan">便捷购物，美好生活</text>
+    <view class="version-tag">
+      <text class="version-text">v1.0.0</text>
+    </view>
+  </view>
+
+  <!-- 联系我们卡片 -->
+  <view class="contact-card">
+    <view class="card-title">
+      <text class="title-icon">📞</text>
+      <text>联系我们</text>
+    </view>
+    
+    <view class="contact-list">
+      <view class="contact-item">
+        <view class="contact-left">
+          <text class="contact-icon">📱</text>
+          <text class="contact-label">客服电话</text>
+        </view>
+        <view class="contact-right">
+          <text class="contact-value">19860298230</text>
+          <text class="contact-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="contact-item">
+        <view class="contact-left">
+          <text class="contact-icon">⏰</text>
+          <text class="contact-label">工作时间</text>
+        </view>
+        <view class="contact-right">
+          <text class="contact-value">9:00-21:00</text>
+          <text class="contact-arrow">›</text>
+        </view>
+      </view>
+      
+      <view class="contact-item">
+        <view class="contact-left">
+          <text class="contact-icon">📍</text>
+          <text class="contact-label">公司地址</text>
+        </view>
+        <view class="contact-right">
+          <text class="contact-value">广东省佛山市南海区</text>
+          <text class="contact-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 应用介绍卡片 -->
+  <view class="intro-card">
+    <view class="card-title">
+      <text class="title-icon">✨</text>
+      <text>应用介绍</text>
+    </view>
+    <view class="intro-content">
+      <text class="intro-text">校园小卖部致力于为在校师生提供便捷、高效的线上购物体验。我们精选各类日用品、食品饮料、学习用品等，让您足不出户即可享受优质的商品和服务。</text>
+    </view>
+  </view>
+
+  <!-- 版权信息 -->
+  <view class="copyright">
+    <text>© 2026 校园小卖部 版权所有</text>
+  </view>
+</view>
